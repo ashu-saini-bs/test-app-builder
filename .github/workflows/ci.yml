@@ -12,17 +12,17 @@ jobs:
         run: |
           npm run dev-setup
 
-  # build-web:
-  #   needs: install-dependecies
-  #   runs-on: ubuntu-latest
-  #   steps:
-  #     - uses: actions/checkout@v2
-  #     # - name: Install npm dependencies
-  #     #   run: |
-  #     #     npm install
-  #     - name: Build for web
-  #       run: |
-  #         cd template && npm run web:build
+  build-web:
+    needs: setup-project
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      # - name: Install npm dependencies
+      #   run: |
+      #     npm install
+      - name: Build for web
+        run: |
+          cd template && npm run web:build
 
   # build-android:
   #   needs: install-dependecies
