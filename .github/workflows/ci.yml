@@ -4,11 +4,11 @@ on:
     branches:
       - dev
 jobs:
-  install-dependecies:
+  setup-project:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - name: Install npm dependencies
+      - name: setup project dependencies
         run: |
           npm run dev-setup
 
