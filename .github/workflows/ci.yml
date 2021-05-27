@@ -12,34 +12,34 @@ jobs:
   #       run: |
   #         npm run dev-setup
 
-  build-web:
-    # needs: setup-project
+  # build-web:
+  #   needs: setup-project
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - uses: actions/checkout@v2
+  #     - name: setup project dependencies
+  #       run: |
+  #         npm run dev-setup
+  #     - name: Build for web
+  #       run: |
+  #         cd template && npm run web:build
+
+  build-android:
+    # needs: install-dependecies
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
       - name: setup project dependencies
         run: |
           npm run dev-setup
-      - name: Build for web
+      - name: Build Android Release
         run: |
-          cd template && npm run web:build
-
-  # build-android:
-  #   needs: install-dependecies
-  #   runs-on: ubuntu-latest
-  #   steps:
-  #     - uses: actions/checkout@v2
-  #     - name: Install npm dependencies
-  #       run: |
-  #         npm install
-  #     - name: Build Android Release
-  #       run: |
-  #         cd android && ./gradlew assembleRelease
-  #     - name: Upload Android Artifact
-  #       uses: actions/upload-artifact@v1
-  #       with: 
-  #         name: app-release.apk
-  #         path: android/app/build/outputs/apk/release/
+          cd template && cd android && ./gradlew assembleRelease
+      - name: Upload Android Artifact
+        uses: actions/upload-artifact@v1
+        with: 
+          name: app-release.apk
+          path: android/app/build/outputs/apk/release/
 
   # build-ios:
   #   needs: install-dependecies
