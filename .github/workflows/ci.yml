@@ -4,22 +4,22 @@ on:
     branches:
       - dev
 jobs:
-  setup-project:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2
-      - name: setup project dependencies
-        run: |
-          npm run dev-setup
+  # setup-project:
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - uses: actions/checkout@v2
+  #     - name: setup project dependencies
+  #       run: |
+  #         npm run dev-setup
 
   build-web:
     needs: setup-project
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      # - name: Install npm dependencies
-      #   run: |
-      #     npm install
+      - name: setup project dependencies
+        run: |
+          npm run dev-setup
       - name: Build for web
         run: |
           cd template && npm run web:build
