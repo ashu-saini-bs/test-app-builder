@@ -1,5 +1,5 @@
 const path = require('path')
-const fs = require('fs/promises');
+const fs = require('fs').promises;
 const ROOT = path.join(process.cwd(),'template');
 
 console.log('\n\n\tConfiguring the project for dev environment')

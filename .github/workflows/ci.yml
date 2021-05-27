@@ -1,0 +1,80 @@
+name: Build for Platforms
+on:
+  push:
+    branches:
+      - dev
+jobs:
+  install-dependecies:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Install npm dependencies
+        run: |
+          npm install
+
+  build-web:
+    needs: install-dependecies
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Install npm dependencies
+        run: |
+          npm install
+      - name: Build for web
+        run: |
+          npm run web:build
+
+  # build-android:
+  #   needs: install-dependecies
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - uses: actions/checkout@v2
+  #     - name: Install npm dependencies
+  #       run: |
+  #         npm install
+  #     - name: Build Android Release
+  #       run: |
+  #         cd android && ./gradlew assembleRelease
+  #     - name: Upload Android Artifact
+  #       uses: actions/upload-artifact@v1
+  #       with: 
+  #         name: app-release.apk
+  #         path: android/app/build/outputs/apk/release/
+
+  # build-ios:
+  #   needs: install-dependecies
+  #   runs-on: [self-hosted, macos]
+  #   steps:
+  #     - uses: actions/checkout@v2
+  #     - name: Install npm dependencies
+  #       run: |
+  #         npm install
+  #     - name: Install pod dependencies
+  #       run: |
+  #         cd ios && pod install
+  #     - name: Build IOS app
+  #       run: |
+  #         xcodebuild -workspace HelloWorld.xcworkspace -scheme HelloWorld archive -archivePath HelloWorld.xcarchive -allowProvisioningUpdates
+  #         xcodebuild -exportArchive -archivePath ./HelloWorld.xcarchive -exportPath . -exportOptionsPlist HelloWorld/Info.plist
+  #         mv HelloWorld.ipa ../HelloWorld.ipa
+  #     - name: Upload Artifact
+  #       uses: actions/upload-artifact@v1
+  #       with:
+  #         name: HelloWorld.ipa
+  #         path: ios/build/
+
+  # buid-macOS:
+  #   needs: install-dependecies
+  #   runs-on: [self-hosted, macos]
+  #   steps:
+  #     - uses: actions/checkout@v2
+  #     - name: Install npm dependencies
+  #       run: |
+  #         npm install
+  #     - name: Build macOS app
+  #       run: |
+  #         npm run mac:build
+
+  # build-windows:
+  #   needs: install-dependecies
+  #   runs-on: []
