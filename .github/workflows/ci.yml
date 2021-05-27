@@ -49,9 +49,8 @@ jobs:
           cd template && cd ios && pod install
       - name: Build IOS app
         run: |
-          xcodebuild -workspace HelloWorld.xcworkspace -scheme HelloWorld archive -archivePath HelloWorld.xcarchive -allowProvisioningUpdates
-          xcodebuild -exportArchive -archivePath ./HelloWorld.xcarchive -exportPath . -exportOptionsPlist HelloWorld/Info.plist
-          mv HelloWorld.ipa ../HelloWorld.ipa
+          xcodebuild -workspace template/ios/HelloWorld.xcworkspace -scheme HelloWorld archive -archivePath template/ios/HelloWorld.xcarchive -allowProvisioningUpdates
+          xcodebuild -exportArchive -archivePath template/ios/HelloWorld.xcarchive -exportPath . -exportOptionsPlist template/ios/HelloWorld/Info.plist
       
 
   # buid-macOS:
