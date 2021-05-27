@@ -12,34 +12,40 @@ jobs:
   #       run: |
   #         npm run dev-setup
 
-  # build-web:
-  #   needs: setup-project
-  #   runs-on: ubuntu-latest
-  #   steps:
-  #     - uses: actions/checkout@v2
-  #     - name: setup project dependencies
-  #       run: |
-  #         npm run dev-setup
-  #     - name: Build for web
-  #       run: |
-  #         cd template && npm run web:build
-
-  build-android:
-    # needs: install-dependecies
+  build-web:
+    needs: setup-project
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
       - name: setup project dependencies
         run: |
           npm run dev-setup
-      - name: Build Android Release
+      - name: Build for web
         run: |
-          cd template && cd android && ./gradlew assembleRelease
-      - name: Upload Android Artifact
-        uses: actions/upload-artifact@v2
-        with: 
-          name: app-release.apk
-          path: android/app/build/outputs/apk/release/
+          cd template && npm run web:build
+      # Share artifact inside workflow
+      - name: Share artifact inside workflow
+        uses: actions/upload-artifact@v1
+        with:
+          name: react-github-actions-build
+          path: build
+
+  # build-android:
+  #   # needs: install-dependecies
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - uses: actions/checkout@v2
+  #     - name: setup project dependencies
+  #       run: |
+  #         npm run dev-setup
+  #     - name: Build Android Release
+  #       run: |
+  #         cd template && cd android && ./gradlew assembleRelease
+  #     - name: Upload Android Artifact
+  #       uses: actions/upload-artifact@v2
+  #       with: 
+  #         name: app-release.apk
+  #         path: android/app/build/outputs/apk/release/
 
   # build-ios:
   #   needs: install-dependecies
