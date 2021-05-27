@@ -12,26 +12,20 @@ jobs:
   #       run: |
   #         npm run dev-setup
 
-  build-web:
-    # needs: setup-project
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2
-      - name: setup project dependencies
-        run: |
-          npm run dev-setup
-      - name: Build for web
-        run: |
-          cd template && npm run web:build
-      # Share artifact inside workflow
-      - name: Share artifact inside workflow
-        uses: actions/upload-artifact@v1
-        with:
-          name: react-github-actions-build
-          path: build
+  # build-web:
+  #   needs: setup-project
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - uses: actions/checkout@v2
+  #     - name: setup project dependencies
+  #       run: |
+  #         npm run dev-setup
+  #     - name: Build for web
+  #       run: |
+  #         cd template && npm run web:build
 
   # build-android:
-  #   # needs: install-dependecies
+  #   needs: setup-project
   #   runs-on: ubuntu-latest
   #   steps:
   #     - uses: actions/checkout@v2
@@ -41,33 +35,24 @@ jobs:
   #     - name: Build Android Release
   #       run: |
   #         cd template && cd android && ./gradlew assembleRelease
-  #     - name: Upload Android Artifact
-  #       uses: actions/upload-artifact@v2
-  #       with: 
-  #         name: app-release.apk
-  #         path: android/app/build/outputs/apk/release/
 
-  # build-ios:
-  #   needs: install-dependecies
-  #   runs-on: [self-hosted, macos]
-  #   steps:
-  #     - uses: actions/checkout@v2
-  #     - name: Install npm dependencies
-  #       run: |
-  #         npm install
-  #     - name: Install pod dependencies
-  #       run: |
-  #         cd ios && pod install
-  #     - name: Build IOS app
-  #       run: |
-  #         xcodebuild -workspace HelloWorld.xcworkspace -scheme HelloWorld archive -archivePath HelloWorld.xcarchive -allowProvisioningUpdates
-  #         xcodebuild -exportArchive -archivePath ./HelloWorld.xcarchive -exportPath . -exportOptionsPlist HelloWorld/Info.plist
-  #         mv HelloWorld.ipa ../HelloWorld.ipa
-  #     - name: Upload Artifact
-  #       uses: actions/upload-artifact@v1
-  #       with:
-  #         name: HelloWorld.ipa
-  #         path: ios/build/
+  build-ios:
+    # needs: setup-project
+    runs-on: [self-hosted, macos]
+    steps:
+      - uses: actions/checkout@v2
+      - name: setup project dependencies
+        run: |
+          npm run dev-setup
+      - name: Install pod dependencies
+        run: |
+          cd template && cd ios && pod install
+      - name: Build IOS app
+        run: |
+          xcodebuild -workspace HelloWorld.xcworkspace -scheme HelloWorld archive -archivePath HelloWorld.xcarchive -allowProvisioningUpdates
+          xcodebuild -exportArchive -archivePath ./HelloWorld.xcarchive -exportPath . -exportOptionsPlist HelloWorld/Info.plist
+          mv HelloWorld.ipa ../HelloWorld.ipa
+      
 
   # buid-macOS:
   #   needs: install-dependecies
