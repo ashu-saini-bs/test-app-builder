@@ -36,7 +36,24 @@ jobs:
   #       run: |
   #         cd template && cd android && ./gradlew assembleRelease
 
-  build-ios:
+  # build-ios:
+  #   # needs: setup-project
+  #   runs-on: macos-latest
+  #   steps:
+  #     - uses: actions/checkout@v2
+  #     - name: setup project dependencies
+  #       run: |
+  #         npm run dev-setup
+  #     - name: Install pod dependencies
+  #       run: |
+  #         cd template && cd ios && pod install
+  #     - name: Build IOS app
+  #       run: |
+  #         xcodebuild -workspace template/ios/HelloWorld.xcworkspace -scheme HelloWorld archive -archivePath template/ios/HelloWorld.xcarchive
+  #         xcodebuild -exportArchive -archivePath template/ios/HelloWorld.xcarchive -exportPath . -exportOptionsPlist template/ios/HelloWorld/Info.plist
+      
+
+  buid-macOS:
     # needs: setup-project
     runs-on: macos-latest
     steps:
@@ -44,27 +61,24 @@ jobs:
       - name: setup project dependencies
         run: |
           npm run dev-setup
-      - name: Install pod dependencies
+      - name: Build macOS app
         run: |
-          cd template && cd ios && pod install
-      - name: Build IOS app
+          cd template && npm run mac:build
+      - name: see directory
         run: |
-          xcodebuild -workspace template/ios/HelloWorld.xcworkspace -scheme HelloWorld archive -archivePath template/ios/HelloWorld.xcarchive -allowProvisioningUpdates
-          xcodebuild -exportArchive -archivePath template/ios/HelloWorld.xcarchive -exportPath . -exportOptionsPlist template/ios/HelloWorld/Info.plist
-      
+          ls
 
-  # buid-macOS:
-  #   needs: install-dependecies
-  #   runs-on: [self-hosted, macos]
-  #   steps:
-  #     - uses: actions/checkout@v2
-  #     - name: Install npm dependencies
-  #       run: |
-  #         npm install
-  #     - name: Build macOS app
-  #       run: |
-  #         npm run mac:build
-
-  # build-windows:
-  #   needs: install-dependecies
-  #   runs-on: []
+  buid-windows:
+    # needs: setup-project
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: setup project dependencies
+        run: |
+          npm run dev-setup
+      - name: Build windows app
+        run: |
+          cd template && npm run windows:build
+      - name: see directory
+        run: |
+          ls
