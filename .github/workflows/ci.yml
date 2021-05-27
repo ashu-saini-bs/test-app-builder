@@ -38,7 +38,7 @@ jobs:
 
   build-ios:
     # needs: setup-project
-    runs-on: [self-hosted, macos]
+    runs-on: macos-latest
     steps:
       - uses: actions/checkout@v2
       - name: setup project dependencies
