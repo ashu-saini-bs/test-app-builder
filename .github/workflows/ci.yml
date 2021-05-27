@@ -13,7 +13,7 @@ jobs:
   #         npm run dev-setup
 
   build-web:
-    needs: setup-project
+    # needs: setup-project
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
