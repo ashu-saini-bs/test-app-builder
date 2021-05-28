@@ -150,7 +150,24 @@ jobs:
           npm run dev-setup
       - name: Build Android Release
         run: |
-          cd template && cd android && gradlew assembleDebug
+          cd template && cd android && gradle assembleDebug
+      - name: Upload Android Artifact
+        uses: actions/upload-artifact@v2
+        with: 
+          name: app-windows-debug.apk
+          path: template/android/app/build/outputs/apk/debug/
+
+  windows-build-android:
+    # needs: setup-project
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: setup project dependencies
+        run: |
+          npm run dev-setup
+      - name: Build Android Release
+        run: |
+          cd template && cd android && ./gradlew assembleDebug
       - name: Upload Android Artifact
         uses: actions/upload-artifact@v2
         with: 
