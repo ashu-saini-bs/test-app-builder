@@ -81,7 +81,7 @@ jobs:
   #         path: template/android/app/build/outputs/apk/debug/
 
   mac-build-ios:
-    needs: setup-project
+    # needs: setup-project
     runs-on: macos-latest
     steps:
       - uses: actions/checkout@v2
@@ -141,7 +141,7 @@ jobs:
   #         path: template/dist/
 
   windows-build-android:
-    needs: setup-project
+    # needs: setup-project
     runs-on: windows-latest
     steps:
       - uses: actions/checkout@v2
