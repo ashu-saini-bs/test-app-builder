@@ -59,7 +59,7 @@ jobs:
           cd template && cd ios && pod install
       - name: Build IOS app
         run: |
-          cd teamplate && xcodebuild clean archive -workspace ios/HelloWorld.xcworkspace -scheme HelloWorld -sdk iphoneos -configuration debug archive -archivePath $PWD/build/HelloWorld.xcarchive
+          cd template && xcodebuild clean archive -workspace ios/HelloWorld.xcworkspace -scheme HelloWorld -sdk iphoneos -configuration debug archive -archivePath $PWD/build/HelloWorld.xcarchive
       - name: list directory
         run: |
           ls
