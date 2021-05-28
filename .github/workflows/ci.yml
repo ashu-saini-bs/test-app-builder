@@ -80,7 +80,25 @@ jobs:
   #         name: app-mac-debug.apk
   #         path: template/android/app/build/outputs/apk/debug/
 
-  mac-build-ios:
+  # mac-build-ios:
+  #   # needs: setup-project
+  #   runs-on: macos-latest
+  #   steps:
+  #     - uses: actions/checkout@v2
+  #     - name: setup project dependencies
+  #       run: |
+  #         npm run dev-setup
+  #     - name: Install pod dependencies
+  #       run: |
+  #         cd template && cd ios && pod install
+  #     - name: Build IOS app
+  #       run: |
+  #         cd template && xcodebuild clean archive -workspace ios/HelloWorld.xcworkspace -scheme HelloWorld -sdk iphoneos -configuration Debug -UseModernBuildSystem=NO archive -archivePath $PWD/build/HelloWorld.xcarchive CODE_SIGNING_ALLOWED=NO
+  #     - name: list directory
+  #       run: |
+  #         ls
+
+  mac-build-ios1:
     # needs: setup-project
     runs-on: macos-latest
     steps:
@@ -93,7 +111,15 @@ jobs:
           cd template && cd ios && pod install
       - name: Build IOS app
         run: |
-          cd template && xcodebuild clean archive -workspace ios/HelloWorld.xcworkspace -scheme HelloWorld -sdk iphoneos -configuration Debug -UseModernBuildSystem=NO archive -archivePath $PWD/build/HelloWorld.xcarchive CODE_SIGNING_ALLOWED=NO
+          cd template && "xcodebuild \ 
+          clean archive \
+          -workspace ios/HelloWorld.xcworkspace \
+          -scheme HelloWorld \ 
+          -sdk iphoneos \
+          -configuration Debug \
+          -UseModernBuildSystem=NO \
+          archive -archivePath $PWD/ios/build/HelloWorld.xcarchive \
+          CODE_SIGNING_ALLOWED=NO"
       - name: list directory
         run: |
           ls
