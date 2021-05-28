@@ -149,19 +149,19 @@ jobs:
           name: app-windows-debug.apk
           path: template/android/app/build/outputs/apk/debug/
 
-  # buid-windows:
-  #   needs: setup-project
-  #   runs-on: windows-latest
-  #   steps:
-  #     - uses: actions/checkout@v2
-  #     - name: setup project dependencies
-  #       run: |
-  #         npm run dev-setup
-  #     - name: Build windows app
-  #       run: |
-  #         cd template && mkdir .electron && npm run windows:build
-  #     - name: Upload windows Artifact
-  #       uses: actions/upload-artifact@v2
-  #       with: 
-  #         name: windows-build
-  #         path: template/out/
+  buid-windows:
+    needs: setup-project
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: setup project dependencies
+        run: |
+          npm run dev-setup
+      - name: Build windows app
+        run: |
+          cd template && mkdir .electron && npm run windows:build
+      - name: Upload windows Artifact
+        uses: actions/upload-artifact@v2
+        with: 
+          name: windows-build
+          path: template/out/
