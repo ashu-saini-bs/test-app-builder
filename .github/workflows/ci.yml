@@ -98,7 +98,7 @@ jobs:
       - name: list directory
         run: |
           ls
-       - name: Upload Android Artifact
+      - name: Upload Android Artifact
         uses: actions/upload-artifact@v2
         with: 
           name: hello-world.ipa
