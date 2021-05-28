@@ -157,7 +157,7 @@ jobs:
           name: app-windows-debug.apk
           path: template/android/app/build/outputs/apk/debug/
 
-  windows-build-android:
+  windows-build-android1:
     # needs: setup-project
     runs-on: windows-latest
     steps:
