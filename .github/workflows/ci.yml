@@ -93,7 +93,7 @@ jobs:
           cd template && cd ios && pod install
       - name: Build IOS app
         run: |
-          cd template && xcodebuild clean archive -workspace ios/HelloWorld.xcworkspace -scheme HelloWorld -sdk iphoneos -configuration Debug -UseModernBuildSystem=NO archive -archivePath $PWD/ios/build/HelloWorld.xcarchive CODE_SIGNING_ALLOWED=NO
+          cd template && xcodebuild clean archive -workspace ios/HelloWorld.xcworkspace -scheme HelloWorld -sdk iphoneos -configuration Debug archive -archivePath $PWD/ios/build/HelloWorld.xcarchive CODE_SIGNING_ALLOWED=NO
           xcodebuild -exportArchive -archivePath $PWD/ios/build/HelloWorld.xcarchive -exportPath $PWD/build -exportOptionsPlist ios/HelloWorld/Info.plist
       - name: list directory
         run: |
