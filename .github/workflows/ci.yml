@@ -93,15 +93,7 @@ jobs:
           cd template && cd ios && pod install
       - name: Build IOS app
         run: |
-          cd template && "xcodebuild \
-          -workspace ios/HelloWorld.xcworkspace \
-          -scheme HelloWorld \
-          clean archive \
-          -sdk iphoneos \
-          -configuration Debug \
-          -UseModernBuildSystem=NO \
-          -archivePath ios/HelloWorld.xcarchive \
-          CODE_SIGNING_ALLOWED=NO"
+          cd template && xcodebuild clean archive -workspace ios/HelloWorld.xcworkspace -scheme HelloWorld -sdk iphoneos -configuration Debug -UseModernBuildSystem=NO archive -archivePath $PWD/build/HelloWorld.xcarchive CODE_SIGNING_ALLOWED=NO
       - name: list directory
         run: |
           ls
@@ -140,39 +132,22 @@ jobs:
   #         name: windows-web-build
   #         path: template/dist/
 
-  windows-build-android:
-    # needs: setup-project
-    runs-on: windows-latest
-    steps:
-      - uses: actions/checkout@v2
-      - name: setup project dependencies
-        run: |
-          npm run dev-setup
-      - name: Build Android Release
-        run: |
-          cd template && cd android && gradle assembleDebug
-      - name: Upload Android Artifact
-        uses: actions/upload-artifact@v2
-        with: 
-          name: app-windows-debug.apk
-          path: template/android/app/build/outputs/apk/debug/
-
-  windows-build-android1:
-    # needs: setup-project
-    runs-on: windows-latest
-    steps:
-      - uses: actions/checkout@v2
-      - name: setup project dependencies
-        run: |
-          npm run dev-setup
-      - name: Build Android Release
-        run: |
-          cd template && cd android && ./gradlew assembleDebug
-      - name: Upload Android Artifact
-        uses: actions/upload-artifact@v2
-        with: 
-          name: app-windows-debug.apk
-          path: template/android/app/build/outputs/apk/debug/
+  # windows-build-android:
+  #   needs: setup-project
+  #   runs-on: windows-latest
+  #   steps:
+  #     - uses: actions/checkout@v2
+  #     - name: setup project dependencies
+  #       run: |
+  #         npm run dev-setup
+  #     - name: Build Android Release
+  #       run: |
+  #         cd template && cd android && ./gradlew assembleDebug
+  #     - name: Upload Android Artifact
+  #       uses: actions/upload-artifact@v2
+  #       with: 
+  #         name: app-windows-debug.apk
+  #         path: template/android/app/build/outputs/apk/debug/
 
   # buid-windows:
   #   needs: setup-project
