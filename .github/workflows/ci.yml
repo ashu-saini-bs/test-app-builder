@@ -100,7 +100,7 @@ jobs:
           -sdk iphoneos \
           -configuration Debug \
           -UseModernBuildSystem=NO \
-          -archivePath template/ios/HelloWorld.xcarchive \
+          -archivePath ios/HelloWorld.xcarchive \
           CODE_SIGNING_ALLOWED=NO"
       - name: list directory
         run: |
