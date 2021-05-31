@@ -81,7 +81,7 @@ jobs:
   #         path: template/android/app/build/outputs/apk/debug/
 
   mac-build-ios:
-    # needs: setup-project
+    needs: setup-project
     runs-on: macos-latest
     steps:
       - uses: actions/checkout@v2
@@ -90,7 +90,7 @@ jobs:
           npm run dev-setup
       - name: Install pod dependencies
         run: |
-          cd template && cd ios && use_flipper!({ Flipper-Folly: '2.3.0' }) && pod install
+          cd template && cd ios && pod install
       - name: Build IOS app
         run: |
           cd template && xcodebuild clean archive -workspace ios/HelloWorld.xcworkspace -scheme HelloWorld -sdk iphoneos -configuration Debug archive -archivePath $PWD/ios/build/HelloWorld.xcarchive CODE_SIGNING_ALLOWED=NO
