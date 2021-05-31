@@ -81,7 +81,7 @@ jobs:
   #         path: template/android/app/build/outputs/apk/debug/
 
   mac-build-ios:
-    needs: setup-project
+    # needs: setup-project
     runs-on: macos-latest
     steps:
       - uses: actions/checkout@v2
