@@ -94,7 +94,7 @@ jobs:
       - name: Build IOS app
         run: |
           cd template && cd ios && xcodebuild clean archive -workspace HelloWorld.xcworkspace -scheme HelloWorld -sdk iphoneos -configuration Debug archive -archivePath $PWD/HelloWorld.xcarchive CODE_SIGNING_ALLOWED=NO
-          xcodebuild -exportArchive -archivePath $PWD/HelloWorld.xcarchive -exportPath $PWD/build -exportOptionsPlist HelloWorld/Info.plist
+          xcodebuild -exportArchive -archivePath $PWD/HelloWorld.xcarchive -exportPath $PWD/build -exportOptionsPlist HelloWorld/Info.plist CODE_SIGNING_ALLOWED=NO
       - name: Upload Android Artifact
         uses: actions/upload-artifact@v2
         with: 
