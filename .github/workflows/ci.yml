@@ -93,7 +93,7 @@ jobs:
           cd template && cd ios && pod install
       - name: Build IOS app
         run: |
-          cd template && cd ios && xcodebuild clean archive -workspace HelloWorld.xcworkspace -scheme HelloWorld -sdk iphoneos -configuration Debug archive -archivePath $PWD/HelloWorld.xcarchive CODE_SIGNING_ALLOWED=NO
+          cd template && cd ios && xcodebuild -scheme HelloWorld -workspace HelloWorld.xcworkspace
       # - name: Upload Android Artifact
       #   uses: actions/upload-artifact@v2
       #   with: 
